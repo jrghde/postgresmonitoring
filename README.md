@@ -10,3 +10,5 @@ mk_postgres.py - Anpassungen für Host-Kommunikation
     Das .pgpass File muss zwingend die folgenden Berechtigungen haben  
     
         -rw------- 1 postgres postgres   42 Nov 25 20:38 .pgpass  
+
+Link zu Noah Geelers docker-compose File: <https://github.com/Nevah5/DockerMonitoring>
