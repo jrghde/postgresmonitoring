@@ -1,10 +1,10 @@
+
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # Copyright (C) 2019 tribe29 GmbH - License: GNU General Public License v2
 # This file is part of Checkmk (https://checkmk.com). It is subject to the terms and
 # conditions defined in the file COPYING, which is part of this source code package.
 r"""Check_MK Agent Plugin: mk_postgres
-
 This is a Check_MK Agent plugin. If configured, it will be called by the
 agent without any arguments.
 """
@@ -77,7 +77,6 @@ class PostgresBase:
     Base class for x-plattform postgres queries
     :param db_user: The postgres db user
     :param instance: Pass an instance, in case of monitoring a server with multiple instances
-
     All abstract methods must have individual implementation depending on the OS type
     which runs postgres.
     All non-abstract methods are meant to work on all OS types which were subclassed.
@@ -366,12 +365,13 @@ class PostgresWin(PostgresBase):
         """This method returns the system specific psql interface binary as callable string"""
 
         # TODO: Make this more clever...
-        for pg_ver in self._supported_pg_versions:
-            bin_path = "C:\\Program Files\\PostgreSQL\\%s\\bin" % pg_ver
-            psql_path = "%s\\psql.exe" % bin_path
-            if os.path.isfile(psql_path):
-                return psql_path, bin_path
-
+#        for pg_ver in self._supported_pg_versions:
+#            bin_path = "C:\\Program Files\\PostgreSQL\\%s\\bin" % pg_ver
+        bin_path = "C:\\Program Files\\PostgreSQL\\14\\bin"
+#            psql_path = "%s\\psql.exe" % bin_path
+        psql_path = "%s\\psql.exe" % bin_path
+#            if os.path.isfile(psql_path):
+        return psql_path, bin_path
         raise IOError("Could not determine psql bin and its path.")
 
     def get_instances(self):
@@ -889,7 +889,6 @@ def parse_env_file(env_file):
 def parse_postgres_cfg(postgres_cfg):
     """
     Parser for Postgres config. x-Plattform compatible.
-
     Example for .cfg file:
     DBUSER=postgres
     INSTANCE=/home/postgres/db1.env:USER_NAME:/PATH/TO/.pgpass
@@ -1013,4 +1012,3 @@ def main(argv=None):
 
 if __name__ == "__main__":
     main()
-
